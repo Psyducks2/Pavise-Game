@@ -63,7 +63,7 @@ namespace PaviseApp
                     performanceFeatureCard.RestartScope = ((performanceFeatureKeyResult == "EnvPerformanceBundleV1") ? PerformanceRestartScope.SystemRestart : PerformanceRestartFor(performanceFeatureKeyResult));
                     performanceFeatureCard.Lifetime = PerformanceLifetimeFor(performanceFeatureKeyResult);
                     performanceFeatureCard.RestartText = "";
-                    performanceFeatureCard.Title = performanceFeatureCard.Title.Replace(" · 需重启", "").Replace(" · restart required", "");
+                    performanceFeatureCard.Title = performanceFeatureCard.Title.Replace(" · 需重启", "").Replace(" · restart required", "").Replace(" · reinicialização necessária", "");
                     ConfigurePerformanceConsole(performanceFeatureCard, performanceFeatureKeyResult);
                     performanceFeatureCard.ArrangePresentation();
                 }
