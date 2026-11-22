@@ -4,8 +4,66 @@ using System.Threading;
 
 namespace PaviseApp
 {
+    internal sealed class SuppressedProcessDetail
+    {
+        public int Pid { get; private set; }
+        public string Name { get; private set; }
+        public string Level { get; private set; }
+        public long Creation { get; private set; }
+
+        public SuppressedProcessDetail(int pid, string name, string level, long creation)
+        {
+            Pid = pid;
+            Name = name;
+            Level = level;
+            Creation = creation;
+        }
+    }
+
     internal sealed partial class SuppressionCore
     {
+        internal List<SuppressedProcessDetail> GetActiveSuppressedProcesses()
+        {
+            var list = new List<SuppressedProcessDetail>();
+            lock (sync)
+            {
+                foreach (KeyValuePair<int, Entry> kvp in map)
+                {
+                    int pid = kvp.Key;
+                    Entry entry = kvp.Value;
+                    if (entry != null && (entry.Reasons & SuppressReason.Background) != 0 && entry.Applied)
+                    {
+                        string levelText = entry.Level.ToString();
+                        if (entry.BackgroundLevel != SuppressionLevel.None)
+                            levelText = "Background " + entry.BackgroundLevel;
+                        list.Add(new SuppressedProcessDetail(pid, entry.Name ?? ("PID " + pid), levelText, entry.Creation));
+                    }
+                }
+            }
+            return list;
+        }
+
+        internal int ReleaseAllBackground()
+        {
+            var pids = new List<int>();
+            lock (sync)
+            {
+                foreach (KeyValuePair<int, Entry> kvp in map)
+                {
+                    if (kvp.Value != null && (kvp.Value.Reasons & SuppressReason.Background) != 0 && kvp.Value.Applied)
+                    {
+                        pids.Add(kvp.Key);
+                    }
+                }
+            }
+            int count = 0;
+            foreach (int pid in pids)
+            {
+                if (Release(pid, SuppressReason.Background))
+                    count++;
+            }
+            return count;
+        }
 
         private sealed class FailureBudget
         {

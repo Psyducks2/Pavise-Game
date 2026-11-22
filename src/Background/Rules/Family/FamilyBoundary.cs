@@ -155,7 +155,7 @@ namespace PaviseApp
                 }
             }
             // 反作弊一律受保护 不进家族治理 可压制的由反作弊引擎按游戏开关接管
-            bool protectedRuntime = AntiCheatCatalog.IsAntiCheatProcess(name, path) || WeGameRuntimeProtection.IsCriticalRuntime(name, path) || NetAcceleratorCatalog.IsAcceleratorLikeName(name) || NetAcceleratorCatalog.IsAcceleratorLikePath(path) || SecurityProductCatalog.IsSecurityProduct(path) || PeripheralCatalog.IsInputChainProcess(name, path) || HardwareControlCatalog.IsHardwareControlProcess(name) || StreamingToolCatalog.IsStreamingToolProcess(name, path) || VoiceChatCatalog.IsVoiceChatProcess(name, path);
+            bool protectedRuntime = AntiCheatCatalog.IsAntiCheatProcess(name, path) || WeGameRuntimeProtection.IsCriticalRuntime(name, path) || NetAcceleratorCatalog.IsAcceleratorLikeName(name) || NetAcceleratorCatalog.IsAcceleratorLikePath(path) || SecurityProductCatalog.IsSecurityProduct(path) || PeripheralCatalog.IsInputChainProcess(name, path) || HardwareControlCatalog.IsHardwareControlProcess(name) || StreamingToolCatalog.IsStreamingToolProcess(name, path) || VoiceChatCatalog.IsVoiceChatProcess(name, path) || ProductivityToolCatalog.IsProductivityProcess(name, path);
             if (creation > 0)
             {
                 lock (catalogSync)

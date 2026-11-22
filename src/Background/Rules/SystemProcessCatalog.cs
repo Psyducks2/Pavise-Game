@@ -38,11 +38,19 @@ namespace PaviseApp
 
         internal static bool IsShellProcess(string name)
         {
-            if (!string.Equals(name, "explorer", StringComparison.OrdinalIgnoreCase) && !string.Equals(name, "applicationframehost", StringComparison.OrdinalIgnoreCase) && !string.Equals(name, "shellexperiencehost", StringComparison.OrdinalIgnoreCase) && !string.Equals(name, "startmenuexperiencehost", StringComparison.OrdinalIgnoreCase))
+            if (string.Equals(name, "explorer", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(name, "seelen-ui", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(name, "retrobar", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(name, "cairoshell", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(name, "startallback", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(name, "start11", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(name, "applicationframehost", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(name, "shellexperiencehost", StringComparison.OrdinalIgnoreCase)
+                || string.Equals(name, "startmenuexperiencehost", StringComparison.OrdinalIgnoreCase))
             {
-                return string.Equals(name, "searchhost", StringComparison.OrdinalIgnoreCase);
+                return true;
             }
-            return true;
+            return string.Equals(name, "searchhost", StringComparison.OrdinalIgnoreCase);
         }
     }
 }

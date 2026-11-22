@@ -967,5 +967,28 @@ namespace PaviseApp
             }
             return parentCreation == value;
         }
+
+        public List<SuppressedProcessDetail> GetCurrentlySuppressedProcesses()
+        {
+            return core != null ? core.GetActiveSuppressedProcesses() : new List<SuppressedProcessDetail>();
+        }
+
+        public void ReleaseAndWhitelistProcess(int pid, string name)
+        {
+            if (core != null)
+            {
+                core.Release(pid, SuppressReason.Background);
+            }
+            if (!string.IsNullOrEmpty(name))
+            {
+                string procName = System.IO.Path.GetFileNameWithoutExtension(name);
+                AddWhitelistRule(WhitelistRuleKind.LegacyName, procName);
+            }
+        }
+
+        public int ReleaseAllBackgroundSuppression()
+        {
+            return core != null ? core.ReleaseAllBackground() : 0;
+        }
     }
 }

@@ -21,7 +21,27 @@ namespace PaviseApp
                 Name = "overviewGuardActivity", AutoSize = false, AutoEllipsis = true,
                 Font = Theme.UI(9f, false), BackColor = Theme.Bg,
                 ForeColor = Theme.Dim, TextAlign = ContentAlignment.MiddleCenter,
-                TabStop = false, Visible = false
+                TabStop = false, Visible = false, Cursor = Cursors.Hand
+            };
+            overviewActivity.MouseEnter += delegate
+            {
+                if (overviewActivity != null && !overviewActivity.IsDisposed)
+                    overviewActivity.ForeColor = Theme.Accent;
+            };
+            overviewActivity.MouseLeave += delegate
+            {
+                if (overviewActivity != null && !overviewActivity.IsDisposed)
+                    overviewActivity.ForeColor = Theme.Dim;
+            };
+            overviewActivity.Click += delegate
+            {
+                if (gameMode != null && gameMode.Enabled && gameMode.IsActive)
+                {
+                    using (var dlg = new SuppressedProcessesDialog(gameMode))
+                    {
+                        ShowDim(dlg);
+                    }
+                }
             };
             pageOverview.Controls.Add(overviewActivity);
         }
@@ -32,10 +52,17 @@ namespace PaviseApp
                 || snapshot.ForegroundVersion != gameMode.GuardActivityForegroundVersion)) return;
             overviewActivitySnapshot = snapshot;
             if (overviewActivity == null || overviewActivity.IsDisposed) return;
-            overviewActivity.Text = snapshot == null
+            string text = snapshot == null
                 ? (gameMode.SmartSceneSwitchedOut
                     ? PerformancePolicy.Text("检测到切出游戏，正在读取后台恢复状态…", "Game switched out; checking background restoration…")
                     : PerformancePolicy.Text("正在读取本局执行结果…", "Reading this session's actions…")) : snapshot.Summary;
+
+            if (snapshot != null && snapshot.Processes != null && snapshot.Processes.Length > 0 && !snapshot.SmartSwitchedOut)
+            {
+                text += PerformancePolicy.Text(" · 点击查看与管理", " · Click to view & manage");
+            }
+
+            overviewActivity.Text = text;
             overviewActivity.AccessibleName = overviewActivity.Text;
             overviewActivity.AccessibleDescription = overviewActivity.Text;
         }

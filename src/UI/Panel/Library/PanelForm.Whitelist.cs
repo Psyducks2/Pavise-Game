@@ -666,6 +666,8 @@ namespace PaviseApp
             // 语音通话软件内置保护 对局中开黑不因后台治理卡语音
             string voiceProducts = string.Join(" · ", VoiceChatCatalog.ProductsForDisplay());
             list.Add(AutomaticExemption("white.auto.voice", Lang.F("white.auto.voice.list", voiceProducts), "pulse", DetailSection("white.auto.details.voiceproducts", voiceProducts) + "\r\n\r\n" + DetailSection("white.auto.details.processes", string.Join(" · ", VoiceChatCatalog.ProcessNamesForDisplay())) + "\r\n\r\n" + Lang.T("white.auto.details.voice.note")));
+            string productivityProducts = string.Join(" · ", ProductivityToolCatalog.ProductsForDisplay());
+            list.Add(AutomaticExemption("white.auto.productivity", Lang.F("white.auto.productivity.list", productivityProducts), "monitor", DetailSection("white.auto.details.productivityproducts", productivityProducts) + "\r\n\r\n" + DetailSection("white.auto.details.processes", string.Join(" · ", ProductivityToolCatalog.ProcessNamesForDisplay())) + "\r\n\r\n" + Lang.T("white.auto.details.productivity.note")));
             return list;
         }
         private static string InputDeviceHolderText()

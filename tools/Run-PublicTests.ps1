@@ -17,6 +17,7 @@ $suites = @(
     @{Name='SecurityStartup'; Arguments=''},
     @{Name='SourceCleanup'; Arguments=''},
     @{Name='NativeLoader'; Arguments=''},
+    @{Name='GovernanceFallback'; Arguments=''},
     @{Name='ChineseLogs'; Arguments=''},
     @{Name='PortugueseLanguage'; Arguments=''},
     @{Name='PortugueseIntegration'; Arguments=''}

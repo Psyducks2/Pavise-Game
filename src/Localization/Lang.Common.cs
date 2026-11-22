@@ -61,6 +61,10 @@ namespace PaviseApp
             messages.Add("white.auto.voice.list", new string[2] { "语音软件：{0}", "Voice apps: {0}" });
             messages.Add("white.auto.details.voiceproducts", new string[2] { "语音软件目录", "Voice app catalog" });
             messages.Add("white.auto.details.voice.note", new string[2] { "只认进程名与程序文件名一致的进程，后台治理不压制它们；想让它们被压制，可在对局时关闭这些软件。", "Only processes whose name matches the program file are recognized, and background control leaves them alone. Close these apps during matches if you want them governed." });
+            messages.Add("white.auto.productivity", new string[2] { "生产力与 AI 语音工具", "Productivity & AI Speech Tools" });
+            messages.Add("white.auto.productivity.list", new string[2] { "生产力与 AI 工具：{0}", "Productivity & AI tools: {0}" });
+            messages.Add("white.auto.details.productivityproducts", new string[2] { "生产力与交互工具目录", "Productivity & interactive tools catalog" });
+            messages.Add("white.auto.details.productivity.note", new string[2] { "保护受信任的开发环境、终端、代码编辑器与 AI 语音转文字工具（如 Typeless、Whisper），防止在游戏或后台治理时卡顿。", "Protects trusted development IDEs, terminals, code editors and AI speech-to-text tools (such as Typeless and Whisper) from background throttling." });
             messages.Add("white.auto.details.streaming.note", new string[3] { "保护已识别的直播工具、专用组件和身份核验通过的子孙进程；已确认的成员在父进程退出后仍受保护。独立启动组件须单独识别，游戏家族压制不影响此保护。", "Protects recognized broadcast tools, dedicated components and verified descendants, including confirmed members whose parent has exited. Independent components need their own match. Game-family suppression does not disable this protection.", "認識した配信アプリと一覧の専用コンポーネント、および識別を確認した子孫プロセスを保護します。確認済みで実行中のメンバーは親の終了後も保護します。独立起動したコンポーネントには個別の照合規則が必要です。ゲーム関連のバックグラウンド制御を有効にしても、この保護は維持されます。" });
             messages.Add("white.auto.details.body", new string[2] { "当前版本的识别目录，可选择文本并复制。", "Recognition catalog for this version. Select text to copy." });
             messages.Add("white.auto.details.processes", new string[2] { "明确进程名（不含 .exe）", "Explicit process names (without .exe)" });
